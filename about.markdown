@@ -3,7 +3,7 @@ layout: page
 title: About
 permalink: /about/
 ---
-Kytos-n (Kytos next generation) is a fork of
+Kytos-ng (Kytos next generation) is a fork of
 [Kytos project](https://github.com/kytos), created to continue the development
 of Kytos after the original project was shutdown.
 Its main purpose is to be the main controller of
