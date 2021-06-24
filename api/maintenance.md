@@ -1,7 +1,7 @@
 ---
 repository: maintenance
 layout: api
-title: Msintenance API
+title: Maintenance API
 parent: API
 ---
 {% include api.html %}
