@@ -34,11 +34,9 @@ Metadata
 | Metadata            | Napp        | Object     | Type  | Description                                   | Date       | Used by                       |
 |---------------------|-------------|------------|-------|-----------------------------------------------|------------|-------------------------------|
 | availability        | topology    | link       | float | Link's availability in %                      | 10.15.2021 | sdx napp                      |
-| latency             | topology    | link       | int   | Link's latency in ms                          | 10.15.2021 | sdx napp                      |
 | link\_name          | topology    | link       | str   | Link's Name                                   | 10.15.2021 | sdx napp, evc\_manager        |
 | packet\_loss        | topology    | link       | float | Link's packet loss in %                       | 10.15.2021 | sdx napp                      |
 | bandwidth           | topology    | link       | int   | Link's bandwidth in Gbps                      | 10.15.2021 | sdx napp, pathfinder          |
-| residual\_bandwidth | topology    | link       | float | Link's residual bandwidth in %                | 10.15.2021 | sdx napp                      |
 | address             | topology    | switch     | str   | Node's physical address                       | 10.15.2021 | sdx napp                      |
 | lat                 | topology    | switch     | str   | Node's latitude                               | 10.15.2021 | sdx napp, kytos UI            |
 | lng                 | topology    | switch     | str   | Node's longitude                              | 10.15.2021 | sdx napp, kytos UI            |
@@ -51,11 +49,11 @@ Metadata
 | monitoring          | mef\_eline  | evc        | dict  | EVC's monitoring approaches                   | Planned    | monitoring napp (planned)     |
 | notifications       | mef\_eline  | evc        | dict  | EVC's notification                            | Planned    | monitoring napp (planned)     |
 | frr                 | mef\_eline  | evc        | dict  | If Fast ReRoute is enabled for the EVC        | Planned    | frr napp (planned)            |
-| ownership           | pathfinder  | link       | dict  | Link's owners                                 | 10.20.2021 |                               |
-| utilization         | pathfinder  | link       | float | Link's average utilization in %               | 10.20.2021 |                               |
-| reliability         | pathfinder  | link       | float | Link's reliability in %                       | 10.20.2021 |                               |
-| priority            | pathfinder  | link       | float | Link's priority, used for traffic engineering | 10.20.2021 |                               |
-| delay               | pathfinder  | link       | float | Link's latency in ms                          | 10.20.2021 |                               |
+| ownership           | topology    | link       | dict  | Link's owners                                 | 02.02.2022 | pathfinder                    |
+| utilization         | topology    | link       | float | Link's average utilization in %               | 02.02.2022 | pathfinder                    |
+| reliability         | topology    | link       | float | Link's reliability in %                       | 02.02.2022 | pathfinder                    |
+| priority            | topology    | link       | float | Link's priority, used for traffic engineering | 02.02.2022 | pathfinder                    |
+| delay               | topology    | link       | float | Link's latency in ms                          | 02.02.2022 | pathfinder                    |
 
 Usage examples
 --------------
