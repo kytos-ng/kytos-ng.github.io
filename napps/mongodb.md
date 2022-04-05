@@ -13,7 +13,7 @@ MongoDB has been chosen as a default document-oriented database for NApps that n
 
 ## Architecture
 
-This high-level diagram illustrates how NApps interface with MongoDB. `kytosd` will provide a thread safe client from `pymongo` connecting to a database instance, named `napps` by default, which will be used by NApps to read and write with connection pools that can be configured. Each NApp will have its collection. To avoid single points of failure, MongoDB will be deployed as a 3-node replica set cluster. Depending on future needs, the number of MongoDB nodes might be increased.
+This high-level diagram illustrates how NApps are interfacing with MongoDB. `kytosd` will provide a thread safe client from `pymongo` connecting to a database instance named `napps` by default. NApps will write and read from this database and the connection pool can be configured accordingly, each NApp will have its collection. To avoid single points of failure, MongoDB will be deployed as a 3-node replica set cluster. In the future, the number of MongoDB nodes might be increased.
 
 
 ```
@@ -36,7 +36,7 @@ This high-level diagram illustrates how NApps interface with MongoDB. `kytosd` w
 +-------------+              +--------------+
 ```
 
-If MongoDB settings is set on `kytosd`, then it'll make sure to try to connect to it first before trying to initialize any NApps, this should facilitate bootstraping certain operations such as creading indexes or any other operation at a NApp's `setup` time.
+If MongoDB settings is set on `kytosd`, then it'll make sure to try to connect to it first before trying to initialize any NApps, this should facilitate bootstrapping certain operations such as creating indexes or any other operation at a NApp's `setup` time.
 
 MongoDB version 5.0+ replica set provides a [write concern majority](https://www.mongodb.com/docs/manual/core/replica-set-write-concern/) by default, which means that the driver will write to the primary node, wait for it to replicate to the majority of secondary nodes and then return the response. The read concern on kytos will be primary preferred.
 
@@ -55,13 +55,13 @@ NApps are encouraged to stick with a three layer architecture (presentation, log
 ```
 
 
-- **API & Events Handlers**: Primarily responsible for exposing endpoints and subscribing to events, whenever it needs database data it should be via controllers. API models schema initial validation is done at this layer.
-- **Controllers & Business Managers**: It's responsible for business logic, database CRUD encapsulation and operations, mapping API models (if API models are different than database models), interfacing between presentation and database models. A single controller will typically manage a single collection (or multiple if they are closely related). Managers can emerge to encapsulate more business logic, publish events or other operations that are not database related, they usually won't write directly to the database but can map and modify for the controller to write back if needed.
-- **Database Models**: It's mainly responsible for defining [pydantic](https://pydantic-docs.helpmanual.io/) database schema models. Although MongoDB is schemaless, these database models provide base document structures just so database relations and operations can be modeled accordingly and easier to evolve and reason about. 
+- **API & Events Handlers**: Primarily responsible for exposing endpoints and subscribing to events, database data access should be via controllers. API models schema initial validation is done at this layer.
+- **Controllers & Business Managers**: Responsible for business logic, database CRUD encapsulation and operations, mapping API models (if API models are different than database models), interfacing between presentation and database models. A single controller will typically manage a single collection (or multiple if they are closely related). Managers can emerge to encapsulate more business logic, publish events or other operations that are not database related, they shouldn't write directly to the database but can map and modify for the controller to write if needed.
+- **Database Models**: It's mainly responsible for defining [pydantic](https://pydantic-docs.helpmanual.io/) database schema models. Although MongoDB is schemaless, these database models provide base document structures just so database relations and operations can be modeled accordingly and easier to evolve and reason about. Also they provide certain validations without a round trip to the database.
 
 ### Code Sample
 
-To illustrate a practical example, `upsert_switch` is a method of a controller that's responsible for upserting (update or insert) a switch document into a collection `switches`, notice that `SwitchDoc` is a `pydantic` database model, this method ensures that whichever `switch_dict` payload that is passed will be parsed accordingly. In this example, the response isn't being used by an endpoint or another client, so it's not mapping to an API model (both models can be the same when applicable):
+To illustrate a practical example, `upsert_switch` is a method of a controller that's responsible for upserting (update or insert) a switch document into a collection `switches`, notice that `SwitchDoc` is a `pydantic` database model that represents a database document, this method ensures that a `switch_dict` payload that will be parsed accordingly. In this example, the response isn't being used by an endpoint or another client, so it's not mapping to an API model (both models can be the same when applicable):
 
 ```
 class SwitchDoc(BaseModel):
@@ -100,7 +100,7 @@ class TopoController:
         return updated
 ```
 
-The following Python package and module structure is encouraged, that way NApps that are using this architecture it's evident where things are and how they are generally supposed to be evolved, facilitating for new developers too. On each package, you can start with a `__init__.py` module, as illustrated below, if you don't have many classes and as necessary you can create new modules under a specific package. `api/models` don't necessarily need to be `pydantic` ones, you can also leverage `MongoDB` projections:
+The following Python package and module structure is encouraged, that way NApps that are using this architecture it's evident where things are and how they are generally supposed to be evolved, facilitating for new developers too. On each package, you can start with a `__init__.py` module, as illustrated below and put the classes there, and if necessary you can create new modules under a specific package and move them. `api/models` don't necessarily need to be `pydantic` ones, you can also leverage `MongoDB` projections or use existing models that have already been implemented and tested:
 
 ```
 db/models/__init__.py
@@ -131,7 +131,7 @@ NApps are responsible for handling database operations failure and retries accor
 
 ## MongoDB Transactions
 
-MongoDB supports [ACID updates for individual documents](https://www.mongodb.com/basics/acid-transactions), for multi-document updates if certain types of operation orders and guarantees are needed then transactions can provide ACID transactions. However, as mentioned on [in-progress transactions and write conflicts](https://www.mongodb.com/docs/manual/core/transactions-production-consideration/?_ga=2.121978315.1116834295.1647796783-632507725.1644007955#in-progress-transactions-and-write-conflicts), writes conflicts can happen, so if single-document and multi-document concurrent updates are being handled with transactions, then threading lock is needed. Sometimes it's possible to avoid a transaction by modelling the problem in an embedded document, also, if you don't need to ensure the order of the operations, then it should be OK to not have a transaction and let the database handle the concurrent writes as they come. Retries and dead queue can also help to solve conflicts writes, but it's desirable to try to avoid them in the first place.
+MongoDB supports [ACID updates for individual documents](https://www.mongodb.com/basics/acid-transactions). For multi-document updates, if certain types of operation orders and guarantees are needed then transactions can provide ACID properties too. However, as mentioned on [in-progress transactions and write conflicts](https://www.mongodb.com/docs/manual/core/transactions-production-consideration/?_ga=2.121978315.1116834295.1647796783-632507725.1644007955#in-progress-transactions-and-write-conflicts), writes conflicts can happen, so if single-document and multi-document concurrent updates are being handled with transactions, then threading lock is needed. Sometimes it's possible to avoid a transaction by modelling the problem in an embedded document, also, if you don't need to ensure the order of the operations, then it should be OK to not have a transaction and let the database handle the concurrent writes as they come. Retries and dead queue can also help to solve conflicts writes, but it's desirable to try to avoid them in the first place, so make sure to take this into account when modeling database models.
 
 ## Questions
 
@@ -141,10 +141,10 @@ Check out <a href="/napps/mongodb_notes.html">MongoDB notes</a>.
 
 ### Why not an ORM?
 
-- 1) `pymongo` has demonstrated to be sufficient for our needs, it abstract connection pools and threads, but still exposes lower level constructs and allows you to use locks and deal with concurrency issues, which is crucial to have this kind of control considering how much concurrency is involved on Kytos-ng platform.
-- 2) `pymongo` is very lightweight and the official driver, it's really great that it pretty much has one-to-one mapping to every operation that you'll find in the documentation, so as long as you find information in the docs, learning and finding solutions how to do it with `pymongo` should be very similar, unlike ORMs that sometimes abstract way too much, and you'd have to figure out if it's supported or read their source code to see how it's been implemented. So far, in 2022, there's no SQLAlchemy-like library out there that doesn't abstract too much while empowering to solve problems easily and understanding how the database operations will be translated.
-- 3) Some ORMs have `asyncio` support compatible drivers, but sometimes still over abstract, so composing with kytos `asyncio` core could be challenging to evolve, unlike [motor, which is an official MongoDB async driver](https://github.com/mongodb/motor) that has been designed to compose well with `pymongo` and `asyncio`.
+- 1) `pymongo` has demonstrated to be sufficient for our needs, it abstracts connection pools and threads, but still exposes lower level constructs and allows you to use locks and deal with concurrency issues, which is crucial to have this kind of control considering how much concurrency is involved on Kytos-ng and NApps.
+- 2) `pymongo` is very lightweight and the official driver, it's really great that it pretty much has one-to-one mapping to every operation that you'll find in the documentation, so as long as you find information in the docs, learning and finding solutions how to do it with `pymongo` should be very similar, unlike ORMs that sometimes abstract too much or force an entire different interface, and you'd have to figure out if it's supported or read their source code to see how it's been implemented. So far, in 2022, there's no SQLAlchemy-like library out there that doesn't abstract too much while empowering to solve problems easily and understanding how the database operations will be translated.
+- 3) Some ORMs have `asyncio` support compatible drivers, but sometimes still over abstract, so composing with kytos `asyncio` core would be challenging to evolve, unlike [motor](https://github.com/mongodb/motor) an official MongoDB async driver that has been designed to compose well with `pymongo` and `asyncio`.
 
 ### Why `pydantic` for database models?
 
-- `pydantic` is stable, battle-tested, and it's great at parsing schemas while ensuring validations too. It's also aligned with potential usage to parse and validate events when the existing validations don't cover it.
+- `pydantic` is stable, battle-tested, and it's great at parsing schemas while ensuring validations too. It's also aligned with potential usage to parse and validate events when the existing validations don't cover yet.
