@@ -38,6 +38,8 @@ This high-level diagram illustrates how NApps interface with MongoDB. `kytosd` w
 
 If MongoDB settings is set on `kytosd`, then it'll make sure to try to connect to it first before trying to initialize any NApps, this should facilitate bootstraping certain operations such as creading indexes or any other operation at a NApp's `setup` time.
 
+MongoDB version 5.0+ replica set provides a [write concern majority](https://www.mongodb.com/docs/manual/core/replica-set-write-concern/) by default, which means that the driver will write to the primary node, wait for it to replicate to the majority of secondary nodes and then return the response. The read concern on kytos will be primary preferred.
+
 
 ## NApps Modules
 
@@ -98,7 +100,7 @@ class TopoController:
         return updated
 ```
 
-The following Python package and module structure is encouraged, that way NApps that are using this architecture it's evident where things are and how they are generally supposed to be evolved, facilitating for new developers too. On each package, you can start with a `__init__.py` module, as illustrated below, if you don't have many classes and as necessary you can create new modules under a specific package. `api/models` don't necessarily need to be `pydantic` ones:
+The following Python package and module structure is encouraged, that way NApps that are using this architecture it's evident where things are and how they are generally supposed to be evolved, facilitating for new developers too. On each package, you can start with a `__init__.py` module, as illustrated below, if you don't have many classes and as necessary you can create new modules under a specific package. `api/models` don't necessarily need to be `pydantic` ones, you can also leverage `MongoDB` projections:
 
 ```
 db/models/__init__.py
