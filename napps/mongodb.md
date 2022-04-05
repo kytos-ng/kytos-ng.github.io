@@ -1,10 +1,10 @@
 ---
-title: MongoDB Database
+title: MongoDB
 parent: NApps
 ---
 
-MongoDB Database
-================
+MongoDB
+=======
 
 ## Overview
 
