@@ -135,9 +135,9 @@ MongoDB supports [ACID updates for individual documents](https://www.mongodb.com
 
 ## Questions
 
-### Where can I learn more?
+### Where can I learn more or find more general information?
 
-Check out this [MongoDB notes](./mongodb_notes.md) document, it contains more general information and helpful links.
+Check out <a href="/napps/mongodb_notes.html">MongoDB notes</a>.
 
 ### Why not an ORM?
 
@@ -145,6 +145,6 @@ Check out this [MongoDB notes](./mongodb_notes.md) document, it contains more ge
 - 2) `pymongo` is very lightweight and the official driver, it's really great that it pretty much has one-to-one mapping to every operation that you'll find in the documentation, so as long as you find information in the docs, learning and finding solutions how to do it with `pymongo` should be very similar, unlike ORMs that sometimes abstract way too much, and you'd have to figure out if it's supported or read their source code to see how it's been implemented. So far, in 2022, there's no SQLAlchemy-like library out there that doesn't abstract too much while empowering to solve problems easily and understanding how the database operations will be translated.
 - 3) Some ORMs have `asyncio` support compatible drivers, but sometimes still over abstract, so composing with kytos `asyncio` core could be challenging to evolve, unlike [motor, which is an official MongoDB async driver](https://github.com/mongodb/motor) that has been designed to compose well with `pymongo` and `asyncio`.
 
-### Why `pydantic` for Database Models?
+### Why `pydantic` for database models?
 
 - `pydantic` is stable, battle-tested, and it's great at parsing schemas while ensuring validations too. It's also aligned with potential usage to parse and validate events when the existing validations don't cover it.
