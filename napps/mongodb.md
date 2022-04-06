@@ -13,7 +13,7 @@ MongoDB has been chosen as a default document-oriented database for NApps that n
 
 ## Architecture
 
-This high-level diagram illustrates how NApps are interfacing with MongoDB. `kytosd` will provide a thread safe client from `pymongo` connecting to a database instance named `napps` by default. NApps will write and read from this database and the connection pool can be configured accordingly, each NApp will have its collection. To avoid single points of failure, MongoDB will be deployed as a 3-node replica set cluster. In the future, the number of MongoDB nodes might be increased.
+This high-level diagram illustrates how NApps are interfacing with MongoDB. `kytosd` will provide a thread safe client from [`pymongo`](https://github.com/mongodb/mongo-python-driver) connecting to a database instance named `napps` by default. NApps will write and read from this database and the connection pool can be configured accordingly, each NApp will have its collection. To avoid single points of failure, MongoDB will be deployed as a 3-node replica set cluster. In the future, the number of MongoDB nodes might be increased.
 
 
 ```
