@@ -38,7 +38,7 @@ This high-level diagram illustrates how NApps are interfacing with MongoDB. `kyt
 
 If MongoDB settings is set on `kytosd`, then it'll make sure to try to connect to it first before trying to initialize any NApps, this should facilitate bootstrapping certain operations such as creating indexes or any other operation at a NApp's `setup` time.
 
-MongoDB version 5.0+ replica set provides a [write concern majority](https://www.mongodb.com/docs/manual/core/replica-set-write-concern/) by default, which means that the driver will write to the primary node, wait for it to replicate to the majority of secondary nodes and then return the response. The read concern on kytos will be primary preferred.
+MongoDB version 5.0+ replica set provides a [write concern majority](https://www.mongodb.com/docs/manual/core/replica-set-write-concern/) by default, which means that the driver will write to the primary node, wait for it to replicate to the majority of secondary nodes and then return the response. The read concern on kytos will be majority and read preference primary preferred. The read concern and read preference might change in the future depending on workload and experiments.
 
 
 ## NApps Modules
