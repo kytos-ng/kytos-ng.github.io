@@ -100,7 +100,7 @@ class TopoController:
         return updated
 ```
 
-The following Python package and module structure is encouraged, that way NApps that are using this architecture it's evident where things are and how they are generally supposed to be evolved, facilitating for new developers too. On each package, you can start with a `__init__.py` module, as illustrated below and put the classes there, and if necessary you can create new modules under a specific package and move them. `api/models` don't necessarily need to be `pydantic` ones, you can also leverage `MongoDB` projections or use existing models that have already been implemented and tested:
+The following Python package and module structure is encouraged, that way for NApps using this architecture it's clear where things are and how they are supposed to evolve, facilitating for new developers too. On each package, you can start with a `__init__.py` module, as illustrated below and put the classes there, and if necessary you can create new modules under a specific package and move them. `api/models` don't necessarily need to be `pydantic` ones, you can also leverage `MongoDB` projections or use existing models that have already been implemented and tested:
 
 ```
 db/models/__init__.py
