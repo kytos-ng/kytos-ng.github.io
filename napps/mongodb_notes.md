@@ -51,5 +51,6 @@ MongoDB University has some great free watch on-demand courses, if you're intere
 - [Recommended file systems](https://www.mongodb.com/docs/manual/administration/production-notes/#kernel-and-file-systems)
 - [Back Up and Restore with MongoDB Tools](https://www.mongodb.com/docs/manual/tutorial/backup-and-restore-tools/)
 - [Allocate Sufficient RAM and CPU](https://www.mongodb.com/docs/manual/administration/production-notes/#std-label-prod-notes-ram)
+- [Authentication](https://www.mongodb.com/docs/manual/core/authentication/)
 
 Also, it's desirable that the network connectivity from `kytosd` to MongoDB should be as reliable and as low latency as possible.
