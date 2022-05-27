@@ -49,6 +49,7 @@ MongoDB University has some great free watch on-demand courses, if you're intere
 ### Production notes
 
 - [Recommended file systems](https://www.mongodb.com/docs/manual/administration/production-notes/#kernel-and-file-systems)
+- [Recommended ulimit settings](https://www.mongodb.com/docs/v5.0/reference/ulimit/#recommended-ulimit-settings)
 - [Back Up and Restore with MongoDB Tools](https://www.mongodb.com/docs/manual/tutorial/backup-and-restore-tools/)
 - [Allocate Sufficient RAM and CPU](https://www.mongodb.com/docs/manual/administration/production-notes/#std-label-prod-notes-ram)
 - [Authentication](https://www.mongodb.com/docs/manual/core/authentication/)
