@@ -65,7 +65,7 @@ Internal Metadata
 
 | Metadata              | Napp        | Object     | Type  | Description                                   | Date       | Used by                       |
 |-----------------------|-------------|------------|-------|-----------------------------------------------|------------|-------------------------------|
-| liveness_status       | topology    | link       | str   | Link's liveness status  init\|up\|down        | 06.30.22   | topology, core                |
+| liveness_status       | topology    | link       | str   | Link's liveness status  up\|down              | 06.30.22   | topology, core                |
 | last_status_change    | topology    | link       | float | Link's last status change timestamp           | 06.30.22   | topology                      |
 | last_status_is_active | topology    | link       | bool  | Whether Link's last status is active or not   | 06.30.22   | topology                      |
 
