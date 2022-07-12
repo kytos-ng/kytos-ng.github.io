@@ -14,7 +14,10 @@ perspective, the napp has to provide APIs to store,
 retrieve and manage Metadata information. From the
 Kytos core perspective objects like Switch,
 Interface and Link have their metadata managed
-by the Topology Kytos Napp.
+by the Topology Kytos Napp. In addition to this, 
+sometimes, metadata needs to be used internally and exclusively, 
+meaning that writes and deletions should only be done by the NApp that
+owns this resource, and shouldn't be allowed via APIs.
 
 From a user perspective, you have to make sure
 you are using the proper metadata and also
@@ -54,6 +57,18 @@ Metadata
 | reliability         | topology    | link       | float | Link's reliability in %                       | 02.02.2022 | pathfinder                    |
 | priority            | topology    | link       | float | Link's priority, used for traffic engineering | 02.02.2022 | pathfinder                    |
 | delay               | topology    | link       | float | Link's latency in ms                          | 02.02.2022 | pathfinder                    |
+
+
+Internal Metadata
+-----------------
+
+
+| Metadata              | Napp        | Object     | Type  | Description                                   | Date       | Used by                       |
+|-----------------------|-------------|------------|-------|-----------------------------------------------|------------|-------------------------------|
+| liveness_status       | topology    | link       | str   | Link's liveness status  up\|down              | 06.30.22   | topology, core                |
+| last_status_change    | topology    | link       | float | Link's last status change timestamp           | 06.30.22   | topology                      |
+| last_status_is_active | topology    | link       | bool  | Whether Link's last status is active or not   | 06.30.22   | topology                      |
+
 
 Usage examples
 --------------
