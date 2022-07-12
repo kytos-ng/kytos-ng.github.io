@@ -16,7 +16,7 @@ Kytos core perspective objects like Switch,
 Interface and Link have their metadata managed
 by the Topology Kytos Napp. In addition to this, 
 sometimes, metadata needs to be used internally and exclusively, 
-meaning that writes and deletions should only be done the NApp that
+meaning that writes and deletions should only be done by the NApp that
 owns this resource, and shouldn't be allowed via APIs.
 
 From a user perspective, you have to make sure
