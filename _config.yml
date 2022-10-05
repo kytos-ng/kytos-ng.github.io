@@ -20,7 +20,7 @@
 
 title: Kytos NG
 email: github@rednesp.br
-logo: "/assets/images/kytos-ng.png"
+logo: "/assets/images/kytosng_logo_color.png"
 description: >- # this means to ignore newlines until "baseurl:"
   Kytos NG is a framework to enable SDN (Software-Defined Networks)
 baseurl: "" # the subpath of your site, e.g. /blog
