@@ -27,10 +27,10 @@ Once you have the repos you can visit the `CHANGELOG.rst` file to review the sum
 
 ## Releasing NApps
 
-When a NApp is ready to be released, you have to do the following steps:
+When a NApp is ready to be released, you have to complete the following steps:
 
-- Create a new PR section of the respective version in the `CHANGELOG.rst` consolidating the changes, and updating the version in the `kytos.json` file, and ask for a review from core developers. For example, [here's](https://github.com/kytos-ng/flow_manager/pull/102) a previous PR that bumped a version of `flow_manager`.
-- Once the PR is approved and gets merged, create a new release on GitHub in the respective repo. For instance, [here's](https://github.com/kytos-ng/flow_manager/releases/tag/2022.2.0) an example of `flow_manager`
+- Create a new PR consolidating the changes of the respective version in the `CHANGELOG.rst`, and updating the version in the `kytos.json` file, and ask for a review from core developers. For example, [here's](https://github.com/kytos-ng/flow_manager/pull/102) a previous PR that bumped a version of `flow_manager`.
+- Once the PR is approved and gets merged, create a new release on GitHub in the respective repo. Also, make sure to create a new `git` tag with the same name as the version when publishing the release targeting `master` branch. For instance, [here's](https://github.com/kytos-ng/flow_manager/releases/tag/2022.2.0) an example of `flow_manager`.
 
 ## Announcing
 
