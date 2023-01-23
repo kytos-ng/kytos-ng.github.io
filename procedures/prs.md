@@ -37,6 +37,7 @@ See updated changelog file and/or add any other summarized helpful information f
 
 ### Local Tests
 
+### End-to-End Tests
 ```
 
 - Closes `#<issue_number` is for automatically closing the issue that this PR addresses
