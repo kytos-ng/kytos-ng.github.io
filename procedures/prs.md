@@ -23,7 +23,7 @@ parent: Procedures
 ### PR checklist:
 
 - Make sure linters and unit tests are passing with `tox`
-- Summarize the PR title and add a tag `[feature|fix|hotfix|doc|release|misc] <title>` accordingly
+- Summarize the PR title and add a tag `[feature|fix|hotfix|doc|release|misc]: <title>` accordingly
 - Optionally, depending on the impact of your change, it might be helpful to also run [kytos-end-to-end-tests](https://github.com/amlight/kytos-end-to-end-tests) and include a summary of the results in a `### End-to-end Tests` subsection.
 
 The following template is encouraged to be used:
@@ -42,7 +42,7 @@ See updated changelog file and/or add any other summarized helpful information f
 
 - Closes `#<issue_number` is for automatically closing the issue that this PR addresses
 - `### Summary` will typically be `See updated changelog file` or also include additional helpful information for reviewers
-- `### Local Tests` subsection is for documenting and explaining how you've validated and explored your change locally with `kytosd` in addition to shipping unit tests
+- `### Local Tests` subsection is for documenting and explaining how you've validated and explored your change locally with `kytosd` in addition to shipping unit tests. Make sure to also check that there aren't errors on `kytosd` console or in the logs.
 - `### End-to-end Tests` subsection is optional depending on the impact of the change
 
 That's it. Once your PR is submitted make sure to keep an eye on your PR notifications for any follow ups, once it's approved, a core team member will merge it.
