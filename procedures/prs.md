@@ -23,7 +23,7 @@ parent: Procedures
 ### PR checklist:
 
 - Make sure linters and unit tests are passing with `tox`
-- Summarize the PR title and add a tag `[feature|fix|hotfix|doc|release|misc] <title>` accordingly
+- Summarize the PR title and add a tag `[feature|fix|hotfix|doc|release|misc]: <title>` accordingly
 - Optionally, depending on the impact of your change, it might be helpful to also run [kytos-end-to-end-tests](https://github.com/amlight/kytos-end-to-end-tests) and include a summary of the results in a `### End-to-end Tests` subsection.
 
 The following template is encouraged to be used:
