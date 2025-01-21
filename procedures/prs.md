@@ -79,6 +79,6 @@ Backports are necessary to keep old versions updated. When it is agreed to apply
 
 ### Final observations.
 
-PR created for a previous version does not run automatic tests so make sure to run unit tests to enssure that the changes are safe to be merged.
+PR created for a previous version does not run automatic tests so make sure to run unit tests to ensure that the changes are safe to be merged.
 
 Also, it is allowed to have multiple PRs targetting the same backport version but we never merge on `base/20XX.X.X` more than once.
