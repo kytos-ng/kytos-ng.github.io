@@ -39,13 +39,22 @@ Metadata
 | availability        | topology    | link       | float | Link's availability in %                      | 10.15.2021 | sdx napp                      |
 | link\_name          | topology    | link       | str   | Link's Name                                   | 10.15.2021 | sdx napp, evc\_manager        |
 | packet\_loss        | topology    | link       | float | Link's packet loss in %                       | 10.15.2021 | sdx napp                      |
+| residual\_bandwidth | topology    | link       | int   | Link's bandwidth available in %               | 03.13.2025 | sdx napp                      |
+| latency             | topology    | link       | int   | Link's latency in milliseconds                | 03.13.2025 | sdx napp                      |
 | bandwidth           | topology    | link       | int   | Link's bandwidth in Gbps                      | 10.15.2021 | sdx napp, pathfinder          |
+| sdx\_include        | topology    | link       | bool  | Whether or not that Link should be exported   | 03.13.2025 | sdx napp                      |
 | address             | topology    | switch     | str   | Node's physical address                       | 10.15.2021 | sdx napp                      |
 | lat                 | topology    | switch     | str   | Node's latitude                               | 10.15.2021 | sdx napp, kytos UI            |
 | lng                 | topology    | switch     | str   | Node's longitude                              | 10.15.2021 | sdx napp, kytos UI            |
+| iso3166\_2\_lvl4    | topology    | switch     | str   | alphanumeric codes for the state and country  | 03.13.2025 | sdx napp                      |
 | node\_name          | topology    | switch     | str   | Node's name                                   | 10.15.2021 | sdx napp, evc\_manager        |
+| sdx\_include        | topology    | switch     | bool  | Whether or not Switch should be exported      | 03.13.2025 | sdx napp                      |
 | mtu                 | topology    | interfaces | int   | Interface's mtu in bytes                      | 10.15.2021 | sdx napp                      |
+| sdx\_vlan\_range    | topology    | interfaces | list  | VLAN range allowed for SDX (list of tuples)   | 03.13.2025 | sdx napp                      |
+| sdx\_nni            | topology    | interfaces | str   | Interface connecting your OXP to another OXP  | 03.13.2025 | sdx napp                      |
+| entities            | topology    | interfaces | list  | List of strings to identify Orgs on the port  | 03.13.2025 | sdx napp                      |
 | port\_name          | topology    | interfaces | str   | Interface's name                              | 10.15.2021 | sdx napp, evc\_manager        |
+| sdx\_include        | topology    | interfaces | bool  | Whether or not Interface should be exported   | 03.13.2025 | sdx napp                      |
 | int                 | mef\_eline  | evc        | str   | If INT is enabled for the EVC                 | Planned    | int napp (prototype phase)    |
 | mirror              | mef\_eline  | evc        | str   | If Mirror is enabled for the EVC              | Planned    | mirror napp (prototype phase) |
 | metrics             | mef\_eline  | evc        | dict  | EVC's user-requested metrics                  | Planned    | mef\_eline                    |
